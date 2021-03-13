@@ -1,0 +1,39 @@
+<h1>Spiele</h1>
+<h2 *ngIf="!game.id">Neues Spiel</h2>
+<h2 *ngIf="game.id">Spiel Bearbeiten</h2>
+
+<div>
+  <button *ngIf="!game.id" (click)="createGame()">Erstellen</button>
+  <button *ngIf="game.id" (click)="saveGame()">Speichern</button>
+</div>
+<div>
+  <input type="text" [(ngModel)]="game.title" placeholder="Title" /> <br />
+  <input
+    type="text"
+    [(ngModel)]="game.description"
+    placeholder="Description"
+  /><br />
+</div>
+
+<div>
+  <ul>
+    <li *ngFor="let tag of game.tags">
+      <button (click)="removeTag(tag)">x</button> {{ tag }}
+    </li>
+    <li>
+      <button (click)="addTag()">+</button>
+      <input
+        type="text"
+        (keyup.enter)="addTag()"
+        [(ngModel)]="newTag"
+        placeholder="Tag"
+        list="tags"
+      />
+      <datalist id="tags">
+        <option *ngFor="let tag of availableTags" (click)="addTag()">{{tag}}</option>
+      </datalist>
+    </li>
+  </ul>
+</div>
+
+<div><button *ngIf="game.id" (click)="deleteGame()">Löschen</button></div>

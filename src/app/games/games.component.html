@@ -1,0 +1,7 @@
+<h1>Spiele</h1>
+<p>Das hier sind die Spiele:</p>
+<button routerLink="/games/new">Neu</button>
+<p *ngIf="loading">loading...</p><br/>
+<div *ngFor="let game of games">
+  <a routerLink="/games/{{game.id}}">{{game.title}}</a>
+</div>
